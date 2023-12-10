@@ -1,29 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PointManager : MonoBehaviour
 {
-    [SerializeField] PlayerManager playerManager;
+    PlayerManager playerManager;
+    [SerializeField] private GameObject pointParticle;
+    private GameObject instantedObject;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.tag == "point")
+        if(other.tag == "Player")
         {
-
+            playerManager.point.Value += 1000;
+            instantedObject = Instantiate(pointParticle, transform.position, Quaternion.Euler(0, 0, 90));
+            Destroy(gameObject);
         }
     }
 }
