@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6957577822388388158}
   - component: {fileID: 6957577822388388159}
   - component: {fileID: 7569068736000712948}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6957577822388388156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.709, y: 1.595, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115,7 +115,7 @@ MonoBehaviour:
   isGlobal: 1
   blendDistance: 0
   weight: 1
-  priority: 0
+  priority: 1
 --- !u!114 &7569068736000712948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +128,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0ec51fbd0538a4ebc4a4f682b48803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
   pointParticle: {fileID: 7781405377938350661, guid: 4fd139cb00df3a0469a7149e0ba9f4af,
     type: 3}

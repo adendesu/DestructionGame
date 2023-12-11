@@ -19,7 +19,7 @@ public class PointManager : MonoBehaviour
         if(other.tag == "Player")
         {
             playerManager.point.Value += 1000;
-            instantedObject = Instantiate(pointParticle, transform.position, Quaternion.Euler(0, 0, 90));
+            instantedObject = Instantiate(pointParticle, transform.position, Quaternion.Euler(0, 90, 90));
             Destroy(gameObject);
         }
     }
