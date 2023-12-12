@@ -1,18 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointManager : MonoBehaviour
+public class RecoverHp : MonoBehaviour
 {
-
     [SerializeField] private GameObject pointParticle;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            PlayerManager.point.Value += 1000;
+            if(PlayerManager.playerHp.Value < 6)
+            {
+                PlayerManager.playerHp.Value++;
+            }
             Instantiate(pointParticle, transform.position, Quaternion.Euler(0, 90, 90));
             Destroy(gameObject);
         }

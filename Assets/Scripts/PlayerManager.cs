@@ -5,25 +5,37 @@ using UnityEngine.UI;
 using UniRx;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private Text pointText;
     private Vector3 move;
+    private bool variaRecover = false;
     [SerializeField] private float speed;
     [SerializeField] private float deSpeed;
-    // åªç›ë¨ìx
+    [SerializeField] private GameObject playerPaeticle;
+
+    
+    // ÔøΩÔøΩÔøΩ›ëÔøΩÔøΩx
     private Vector3 _velocity = new Vector3(0,0,0);
 
-    [System.NonSerialized] public ReactiveProperty<int> point = new ReactiveProperty<int>(0);
+    [System.NonSerialized] public static ReactiveProperty<int> point = new ReactiveProperty<int>(0);
+    [System.NonSerialized] public static ReactiveProperty<int> playerHp = new ReactiveProperty<int>(0);
+    [System.NonSerialized] public static ReactiveProperty<float> variaTime = new ReactiveProperty<float>(100);
     private int nowPoint = 0;
     Rigidbody rigidbody;
+
     private void Awake()
     {
         point.Subscribe(_ => ReflectedText());
+        playerHp.Subscribe(_ => Deth());
         rigidbody = gameObject.GetComponent<Rigidbody>();
     }
+    async void Start()
+    {
 
+    }
     private void Update()
     {
         // transform.position += _velocity * Time.deltaTime;
@@ -41,14 +53,41 @@ public class PlayerManager : MonoBehaviour
             .OnUpdate(() => pointText.text = nowPoint.ToString("#,0"));
     }
 
+    public void Deth()
+    {
+        if (playerHp.Value < 0)
+        {
+
+        }
+    }
+
     private void OnMove(InputValue _value)
     {
-        // MoveActionÇÃì¸óÕílÇéÊìæ
+        // MoveActionÔøΩÃìÔøΩÔøΩÕílÔøΩÔøΩÔøΩÊìæ
         var axis = _value.Get<Vector2>();
 
-        // à⁄ìÆë¨ìxÇï€éù
+        // ÔøΩ⁄ìÔøΩÔøΩÔøΩÔøΩxÔøΩÔøΩ€éÔøΩ
         _velocity = new Vector3(axis.x * speed, axis.y * speed, 0);
 
+    }
+    private void OnVaria()
+    {
+        
+    }
+
+    
+    async UniTask VariaCoolTime()
+    {
+        while(variaRecover == true && variaTime.Value > 0)
+        {
+            variaTime.Value--;
+            await UniTask.Delay(100);
+        }
+        while(variaRecover == false && variaTime.Value < 100)
+        {
+            variaTime.Value++;
+            await UniTask.Delay(100);
+        }
     }
 
 }
