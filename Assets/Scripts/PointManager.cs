@@ -12,7 +12,7 @@ public class PointManager : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerManager.point.Value += 1000;
+            ScoreScript.point.Value += 1000;
             Instantiate(pointParticle, transform.position, Quaternion.Euler(0, 90, 90));
             Destroy(gameObject);
         }

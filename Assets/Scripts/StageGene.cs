@@ -16,13 +16,13 @@ public class StageGene : MonoBehaviour
 
     async  UniTask Gene1()
     { 
-        for(int i = 0; i < 1000; i++)
+        for(int i = 0; i < 2000; i++)
         {
             int n = Random.Range(0, 4);
             Instantiate(geneObjects[n],new Vector3(SetCoordinate(-100, 100),SetCoordinate(50, 100),0), Quaternion.Euler(0,0, SetRotation()));
         }
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 1000; i++)
         {
             Instantiate(obstacleObject, new Vector3(SetCoordinate(-100, 100), SetCoordinate(50, 100), 0), Quaternion.Euler(0, 0, SetRotation()));
         }
@@ -30,13 +30,13 @@ public class StageGene : MonoBehaviour
     }
     async UniTask Gene2()
     {
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 2000; i++)
         {
             int n = Random.Range(0, 4);
             Instantiate(geneObjects[n], new Vector3(SetCoordinate(-100, 100), SetCoordinate(-50, 50), 0), Quaternion.Euler(0, 0, SetRotation()));
         }
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 1000; i++)
         {
             float  CoordinateX = SetCoordinate(-100, 100);
             float CoordinateY = SetCoordinate(-50, 50);
@@ -50,13 +50,13 @@ public class StageGene : MonoBehaviour
 
     async UniTask Gene3()
     {
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 2000; i++)
         {
             int n = Random.Range(0, 4);
             Instantiate(geneObjects[n], new Vector3(SetCoordinate(-100, 100), SetCoordinate(-100, -50), 0), Quaternion.Euler(0, 0, SetRotation()));
         }
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 1000; i++)
         {
             Instantiate(obstacleObject, new Vector3(SetCoordinate(-100, 100), SetCoordinate(-100, -50), 0), Quaternion.Euler(0, 0, SetRotation()));
         }
