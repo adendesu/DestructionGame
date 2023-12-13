@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     private Vector3 move;
     private bool variaRecover = false;
     bool canMove = true;
+    public bool canVaria = true;
     [SerializeField] private float speed;
     [SerializeField] private float deSpeed;
     [SerializeField] private ParticleSystem playerPaeticle;
@@ -24,7 +25,6 @@ public class PlayerManager : MonoBehaviour
 
 
     [System.NonSerialized] public static ReactiveProperty<int> playerHp = new ReactiveProperty<int>(0);
-    [System.NonSerialized] public static ReactiveProperty<float> variaTime = new ReactiveProperty<float>(100);
     [System.NonSerialized] public static ReactiveProperty<bool> isPress = new ReactiveProperty<bool>(false);
     private int nowPoint = 0;
     Rigidbody rigidbody;
@@ -62,13 +62,18 @@ public class PlayerManager : MonoBehaviour
             SceneManager.LoadScene("main");
         }
     }
-
+    /// <summary>
+    /// スコアを変える
+    /// </summary>
     public void ReflectedText()
     {
              DOTween.To(() => nowPoint, (_) => nowPoint = _, ScoreScript.point.Value, 1)
             .OnUpdate(() => pointText.text = nowPoint.ToString("#,0"));
     }
-
+    /// <summary>
+    /// ゲームオーバーの時に実行
+    /// </summary>
+    /// <returns></returns>
     async UniTask Deth()
     {
         if (playerHp.Value < 0)
@@ -78,14 +83,20 @@ public class PlayerManager : MonoBehaviour
             speed = 0;
             Time.timeScale = 0.2f;
             await FadeDeth();
-
         }
     }
+    /// <summary>
+    /// ゲームオーバー演出
+    /// </summary>
+    /// <returns></returns>
     async UniTask FadeDeth()
     {
         dethImage.DOFade(1, 1);
     }
-
+    /// <summary>
+    /// プレイヤー移動
+    /// </summary>
+    /// <param name="_value"></param>
     private void OnMove(InputValue _value)
     {
         // MoveAction�̓��͒l���擾
@@ -99,30 +110,41 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
-    void playVaria()
+    /// <summary>
+    /// バリア発動しているかで発動させる
+    /// </summary>
+   async void playVaria()
     {
-        if (isPress.Value)
+        if (isPress.Value && canVaria == true)
         {
             playerPaeticle.Play();
             gameObject.tag = "Untagged";
+            variaRecover = true;
+            await VariaCoolTime();
         }
-        else
+
+        else if(isPress.Value == false)
         {
             playerPaeticle.Stop();
             gameObject.tag = "Player";
+            variaRecover = false;
+            await VariaCoolTime();
         }
     }
-    
+    /// <summary>
+    /// バリアの使用制限
+    /// </summary>
+    /// <returns></returns>
     async UniTask VariaCoolTime()
     {
-        while(variaRecover == true && variaTime.Value > 0)
+        while(canVaria == true && VariaScript.variaTime.Value > 0 && variaRecover == true)
         {
-            variaTime.Value--;
+            VariaScript.variaTime.Value -= 4;
             await UniTask.Delay(100);
         }
-        while(variaRecover == false && variaTime.Value < 100)
+        while( VariaScript.variaTime.Value < 100 && variaRecover == false)
         {
-            variaTime.Value++;
+            VariaScript.variaTime.Value += 2;
             await UniTask.Delay(100);
         }
     }
