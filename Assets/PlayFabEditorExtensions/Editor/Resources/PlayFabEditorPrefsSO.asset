@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: adenhaya031@icloud.com
-  DevAccountToken: 39yspu4mtnhg1naqorcozobjyrrsd9igrm338owhuhuon8hu4f1srat7ntnpx5cm3fpie14zkrmz4n3gdxgbgfbrt1deds4eeyenoet53fmzk59hb6ydgsywojmxsbm8gbac15ytag4j5czx98i3iddnhf4emthmt3wax4gmp63z9g91iw7ykmrkq8zk74dc4uo766yw
+  DevAccountEmail: 
+  DevAccountToken: 
   AadAuthorization: 
-  SelectedStudio: DestructionGame
-  SdkPath: Assets/PlayFabSDK
+  SelectedStudio: 
+  SdkPath: 
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 0
   curSubMenuIdx: 0

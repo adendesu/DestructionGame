@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private ParticleSystem playerPaeticle;
     [SerializeField] RectTransform rectTransform;
     [SerializeField] CanvasGroup dethImage;
+    [SerializeField] AudioSource audioSource;
     // ���ݑ��x
     private Vector3 _velocity = new Vector3(0,0,0);
 
@@ -78,6 +79,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (playerHp.Value < 0)
         {
+            audioSource.PlayOneShot(audioSource.clip);
             _velocity = new Vector3(0, 0, 0);
             rigidbody.velocity = new Vector3(0,0,0);
             speed = 0;
